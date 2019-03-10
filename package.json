@@ -1,0 +1,18 @@
+{
+  "name": "currency-app",
+  "version": "1.0.0",
+  "description": "electron app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "Ihor Pievchev",
+  "license": "ISC",
+  "dependencies": {
+
+  },
+  "dev-dependencies": {
+    "electron": "^4.0.8"
+  }
+}
