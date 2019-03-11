@@ -4,15 +4,16 @@
   "description": "electron app",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron main.js"
   },
   "keywords": [],
   "author": "Ihor Pievchev",
   "license": "ISC",
   "dependencies": {
-
+    "axios": "^0.18.0",
+    "sqlite3": "^4.0.6"
   },
-  "dev-dependencies": {
+  "devDependencies": {
     "electron": "^4.0.8"
   }
 }
