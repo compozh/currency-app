@@ -1,8 +1,10 @@
-const sharedObject = require('electron').remote.getGlobal('sharedObject');
-console.log(sharedObject);
+const {ipcRenderer} = require('electron');
+
+
+console.log(currencyRate);
 // const currencyExchangeBtn = document.querySelector('#getBtn');
 const currencyExchangeOutput = document.querySelector('#output');
-currencyExchangeOutput.innerHTML = sharedObject;
+currencyExchangeOutput.innerHTML = currencyRate;
 // const url = 'http://resources.finance.ua/ru/public/currency-cash.json';
 // currencyExchangeBtn.addEventListener('click', getCurrencyExchange);
 //
