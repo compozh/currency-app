@@ -56,10 +56,10 @@ function getTotalValues(USDCurrencyExchange) {
   
   totalValues.ask.max = getMaxValue(USDCurrencyExchange.ask);
   totalValues.ask.min = getMinValue(USDCurrencyExchange.ask);
-  totalValues.ask.average = getAverageValue(USDCurrencyExchange.ask);
+  totalValues.ask.avr = getAvrValue(USDCurrencyExchange.ask);
   totalValues.bid.max = getMaxValue(USDCurrencyExchange.bid);
   totalValues.bid.min = getMinValue(USDCurrencyExchange.bid);
-  totalValues.bid.average = getAverageValue(USDCurrencyExchange.bid);
+  totalValues.bid.avr = getAvrValue(USDCurrencyExchange.bid);
   
   return totalValues
 }
@@ -72,7 +72,7 @@ function getMinValue(valuesArray) {
   return Math.min.apply(null, valuesArray);
 }
 
-function getAverageValue(valuesArray) {
+function getAvrValue(valuesArray) {
   return valuesArray.reduce((sum, current) => sum + current) / valuesArray.length;
 }
 
