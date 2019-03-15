@@ -1,31 +1,30 @@
 const { ipcRenderer } = require('electron');
-const currencyRateBtn = document.querySelector('#getBtn');
-const currencyRateOutput = document.querySelector('#output');
+const currentCurrencyRateBtn = document.querySelector('#currentBtn');
+const historyCurrencyRateBtn = document.querySelector('#historyBtn');
+const currentCurrencyRateTable = document.querySelector('#currentRate > tbody');
+const historyCurrencyRateTable = document.querySelector('#historyRate > tbody');
 
-ipcRenderer.send('get-data');
-ipcRenderer.on('data', (event, message) => {
+ipcRenderer.send('get-current-data');
+ipcRenderer.on('current-data', (event, message) => fillingTable(currentCurrencyRateTable, message));
+ipcRenderer.on('history', (event, message) => fillingTable(historyCurrencyRateTable, message));
 
-  for (let key in message) {
+currentCurrencyRateBtn.onclick = () => ipcRenderer.send('get-current-data');
+historyCurrencyRateBtn.onclick = () => ipcRenderer.send('get-history-data');
+
+function  fillingTable(tableBody, data) {
+  tableBody.innerHTML = ''; //clear old data
+  
+  for (let key in data) {
     let tr = document.createElement('tr');
-    tr.innerHTML = key;
-    for (let value in message[key]) {
+    let td = document.createElement('td');
+    td.innerHTML = key;
+    tr.appendChild(td);
+    
+    for (let value in data[key]) {
       let td = document.createElement('td');
-      console.log(value);
-      td.innerHTML = value;
+      td.innerHTML = data[key][value];
       tr.appendChild(td);
-      //console.log(document.querySelector(`.${key}-${value}`));
-      //console.log(`.${key}-${value}`);
-      
-      //.innerHTML = message[key][value];
     }
+    tableBody.appendChild(tr);
   }
-  currencyRateOutput.innerHTML = JSON.stringify(message);
-});
-
-currencyRateBtn.onclick = () => ipcRenderer.send('get-data');
-
-
-
-function  createTable() {
-
 }

@@ -7,77 +7,50 @@
   <link rel="stylesheet" href="./styles/table.css"/>
 </head>
 <body>
-
-<main>
-  <article>
-    <table>
-      <thead>
+  <main>
+    <article>
+      <table id="currentRate">
+        <thead>
+          <tr>
+            <th colspan="7">Current currency exchange rate</th>
+          </tr>
+          <tr>
+            <td>USD</td>
+            <td>Avr</td>
+            <td>Max</td>
+            <td>Min</td>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <button id="currentBtn">Update USD currency exchange rate</button>
+    </article>
+    
+    <article>
+      <button id="historyBtn">Update USD currency exchange rate</button>
+      <table id="historyRate">
+        <thead>
         <tr>
-          <th colspan="7">Current currency exchange rate</th>
+          <th colspan="7">Currency USD exchange rate history</th>
         </tr>
         <tr>
-          <td>USD</td>
+          <td rowspan="2">Date</td>
+          <td colspan="3">Ask</td>
+          <td colspan="3">Bid</td>
+        </tr>
+        <tr>
+          <td>Max</td>
+          <td>Min</td>
+          <td>Avr</td>
           <td>Max</td>
           <td>Min</td>
           <td>Avr</td>
         </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Ask</td>
-          <td id="ask-max"></td>
-          <td id="ask-min"></td>
-          <td id="ask-avr"></td>
-        </tr>
-        <tr>
-          <td>Bid</td>
-          <td id="bid-max"></td>
-          <td id="bid-min"></td>
-          <td id="bid-avr"></td>
-        </tr>
-      </tbody>
-    </table>
-  </article>
-  
-  <button id="getBtn">Update USD currency exchange rate</button>
-  <button id="showBtn">Update USD currency exchange rate</button>
-  <div id="output"></div>
-  
-  <table id="history">
-    <thead>
-    <tr>
-      <th colspan="7">Currency USD exchange rate history</th>
-    </tr>
-    <tr>
-      <td rowspan="2">Date</td>
-      <td colspan="3">Ask</td>
-      <td colspan="3">Bid</td>
-    </tr>
-    <tr>
-      <td>Max</td>
-      <td>Min</td>
-      <td>Avr</td>
-      <td>Max</td>
-      <td>Min</td>
-      <td>Avr</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-    </tr>
-    </tbody>
-  </table>
-  
-</main>
-
-<script src="./renderer.js"></script>
-
+        </thead>
+        <tbody></tbody>
+      </table>
+    </article>
+  </main>
+  <script src="./renderer.js"></script>
 </body>
 </html>

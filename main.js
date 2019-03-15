@@ -1,18 +1,11 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const axios = require('axios');
+
 const url = 'http://resources.finance.ua/ru/public/currency-cash.json';
 let mainWindow;
 
 app.on('ready', createWindow);
-
-ipcMain.on('get-data', () => {
-  axios.get(url)
-  .then(response => getUSDCurrencyExchange(response))
-  .then(response => getTotalValues(response))
-  .then(response => mainWindow.webContents.send('data', response))
-  .catch(error => console.log(error));
-});
 
 function createWindow() {
   
@@ -29,13 +22,13 @@ function createWindow() {
   })
 }
 
-function request() {
+ipcMain.on('get-current-data', () => {
   axios.get(url)
   .then(response => getUSDCurrencyExchange(response))
   .then(response => getTotalValues(response))
-  .then(response => mainWindow.webContents.send('data', response))
+  .then(response => mainWindow.webContents.send('current-data', response))
   .catch(error => console.log(error));
-}
+});
 
 function getUSDCurrencyExchange(dataSource) {
   const currencyRate = dataSource.data.organizations;
@@ -61,21 +54,38 @@ function getTotalValues(USDCurrencyExchange) {
   totalValues.bid.min = getMinValue(USDCurrencyExchange.bid);
   totalValues.bid.avr = getAvrValue(USDCurrencyExchange.bid);
   
-  return totalValues
+  return totalValues;
 }
 
 function getMaxValue(valuesArray) {
-  return Math.max.apply(null, valuesArray);
+  return Math.max.apply(null, valuesArray).toFixed(2);
 }
 
 function getMinValue(valuesArray) {
-  return Math.min.apply(null, valuesArray);
+  return Math.min.apply(null, valuesArray).toFixed(2);
 }
 
 function getAvrValue(valuesArray) {
-  return valuesArray.reduce((sum, current) => sum + current) / valuesArray.length;
+  return (valuesArray
+  .reduce((sum, current) => sum + current) / valuesArray.length).toFixed(2);
 }
 
 function writeToDb() {
 
 }
+
+// db.serialize(function() {
+//   db.run("CREATE TABLE lorem (info TEXT)");
+//
+//   var stmt = db.prepare("INSERT INTO lorem VALUES (?)");
+//   for (var i = 0; i < 10; i++) {
+//     stmt.run("Ipsum " + i);
+//   }
+//   stmt.finalize();
+//
+//   db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
+//     console.log(row.id + ": " + row.info);
+//   });
+// });
+//
+// db.close();
